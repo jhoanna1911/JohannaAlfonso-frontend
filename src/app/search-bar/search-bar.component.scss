@@ -1,0 +1,18 @@
+.search-bar {
+  margin-bottom: 1rem;
+
+  input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-bar {
+    input {
+      font-size: 0.9rem;
+    }
+  }
+}

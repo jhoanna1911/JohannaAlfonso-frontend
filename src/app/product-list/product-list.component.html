@@ -1,0 +1,40 @@
+<div class="product-list">
+  <div class="header">
+    <app-search-bar (searchChanged)="onSearch($event)"></app-search-bar>
+    <button (click)="onAddProduct()">Agregar</button>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>LOGO</th>
+        <th>NOMBRE DEL PRODUCTO</th>
+        <th>DESCRIPCIÓN</th>
+        <th>FECHA LIBERACIÓN</th>
+        <th>FECHA DE RESTAURACIÓN</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of paginatedProducts">
+        <td><img [src]="product.logo" alt="Logo" /></td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.releaseDate | date }}</td>
+        <td>{{ product.restoreDate | date }}</td>
+        <td>
+          <button (click)="onEditProduct(product.id)">Editar</button> 
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pagination">
+    <span>{{ paginatedProducts.length }} de {{ totalResults }} Resultados</span>
+    <select (change)="onItemsPerPageChange($event)">
+      <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+    </select>
+  </div>
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+</div>

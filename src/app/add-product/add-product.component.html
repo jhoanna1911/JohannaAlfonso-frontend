@@ -1,0 +1,112 @@
+<div class="add-product">
+    <h2>Agregar Producto</h2>
+    <form (ngSubmit)="onSubmit()" #productForm="ngForm">
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label for="id">ID</label>
+          <input 
+            type="text" 
+            id="id" 
+            name="id" 
+            [(ngModel)]="product.id" 
+            #id="ngModel" 
+            required 
+            minlength="3" 
+            maxlength="10"
+            (blur)="checkIdAvailability()"
+            [ngClass]="{'is-invalid': id.invalid && id.touched || idError}"
+          />
+          <div class="invalid-feedback" *ngIf="id.invalid && id.touched || idError">
+            {{ idError || 'ID es requerido y debe tener entre 3 y 10 caracteres.' }}
+          </div>
+        </div>
+        <div class="form-group col-6">
+          <label for="name">Nombre</label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            [(ngModel)]="product.name" 
+            #name="ngModel" 
+            required 
+            minlength="5" 
+            maxlength="100"
+            [ngClass]="{'is-invalid': name.invalid && name.touched}"
+          />
+          <div class="invalid-feedback" *ngIf="name.invalid && name.touched">
+            Nombre es requerido y debe tener entre 5 y 100 caracteres.
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label for="logo">Logo</label>
+          <input 
+            type="text" 
+            id="logo" 
+            name="logo" 
+            [(ngModel)]="product.logo" 
+            #logo="ngModel" 
+            required
+            [ngClass]="{'is-invalid': logo.invalid && logo.touched}"
+          />
+          <div class="invalid-feedback" *ngIf="logo.invalid && logo.touched">
+            Logo es requerido.
+          </div>
+        </div>
+        <div class="form-group col-6">
+          <label for="description">Descripción</label>
+          <textarea 
+            id="description" 
+            name="description" 
+            [(ngModel)]="product.description" 
+            #description="ngModel" 
+            required 
+            minlength="10" 
+            maxlength="200"
+            [ngClass]="{'is-invalid': description.invalid && description.touched}"
+          ></textarea>
+          <div class="invalid-feedback" *ngIf="description.invalid && description.touched">
+            Descripción es requerida y debe tener entre 10 y 200 caracteres.
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label for="releaseDate">Fecha de Liberación</label>
+          <input 
+            type="date" 
+            id="releaseDate" 
+            name="releaseDate" 
+            [(ngModel)]="product.releaseDate" 
+            #releaseDate="ngModel" 
+            required
+            [ngClass]="{'is-invalid': releaseDate.invalid && releaseDate.touched || releaseDateError}"
+          />
+          <div class="invalid-feedback" *ngIf="releaseDate.invalid && releaseDate.touched || releaseDateError">
+            {{ releaseDateError || 'Fecha de liberación es requerida y debe ser igual o mayor a la fecha actual.' }}
+          </div>
+        </div>
+        <div class="form-group col-6">
+          <label for="restoreDate">Fecha de Restauración</label>
+          <input 
+            type="date" 
+            id="restoreDate" 
+            name="restoreDate" 
+            [(ngModel)]="product.restoreDate" 
+            #restoreDate="ngModel" 
+            required
+            [ngClass]="{'is-invalid': restoreDate.invalid && restoreDate.touched || restoreDateError}"
+          />
+          <div class="invalid-feedback" *ngIf="restoreDate.invalid && restoreDate.touched || restoreDateError">
+            {{ restoreDateError || 'Fecha de restauración es requerida y debe ser exactamente un año posterior a la fecha de liberación.' }}
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" [disabled]="productForm.invalid">Agregar</button>
+        <button type="button" (click)="resetForm()">Reiniciar</button>
+      </div>
+    </form>
+  </div>
+  
